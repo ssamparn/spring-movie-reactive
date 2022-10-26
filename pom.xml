@@ -7,10 +7,18 @@
     <groupId>com.reactive.microservices</groupId>
     <artifactId>spring-movie-reactive</artifactId>
     <version>1.0.0</version>
+    <name>Movie Reactive Service</name>
+    <packaging>pom</packaging>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+
+    <modules>
+        <module>movie-aggregator-service</module>
+        <module>movie-info-service</module>
+        <module>movie-review-service</module>
+    </modules>
 
 </project>
