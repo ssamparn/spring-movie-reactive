@@ -22,15 +22,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ActiveProfiles("test")
 public class MovieInfoRepositoryTest {
 
+    @Autowired
+    private MovieInfoRepository movieInfoRepository;
+
     @BeforeEach
     void setUp() {
         movieInfoRepository
                 .saveAll(createMovieInfo())
                 .blockLast();
     }
-
-    @Autowired
-    private MovieInfoRepository movieInfoRepository;
 
     @Test
     void save__movie_info_test() {
