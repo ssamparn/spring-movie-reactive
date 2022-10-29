@@ -35,6 +35,14 @@ public final class TestUtil {
                 LocalDate.parse("2012-07-20")
         );
 
-        return List.of(movieInfo1, movieInfo2, movieInfo3);
+        MovieInfo movieInfo4 = MovieInfo.create(
+                null,
+                "Jack Reacher",
+                2012,
+                List.of("Tom Cruise", "Rosamund Pike"),
+                LocalDate.parse("2012-08-21")
+        );
+
+        return List.of(movieInfo1, movieInfo2, movieInfo3, movieInfo4);
     }
 }

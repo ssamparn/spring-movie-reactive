@@ -72,7 +72,7 @@ public class MovieInfoRepositoryTest {
         Flux<MovieInfo> movieInfoFlux = movieInfoRepository.findAll().log();
 
         StepVerifier.create(movieInfoFlux)
-                .expectNextCount(3)
+                .expectNextCount(4)
                 .verifyComplete();
     }
 
@@ -91,6 +91,15 @@ public class MovieInfoRepositoryTest {
     void delete__movie_byId_test() {
         movieInfoRepository.deleteById("movieId").block();
         Flux<MovieInfo> movieInfoFlux = movieInfoRepository.findAll().log();
+
+        StepVerifier.create(movieInfoFlux)
+                .expectNextCount(3)
+                .verifyComplete();
+    }
+
+    @Test
+    void find__movie_info_by_releaseyear_test() {
+        Flux<MovieInfo> movieInfoFlux = movieInfoRepository.findMovieInfosByReleaseYear(2012);
 
         StepVerifier.create(movieInfoFlux)
                 .expectNextCount(2)

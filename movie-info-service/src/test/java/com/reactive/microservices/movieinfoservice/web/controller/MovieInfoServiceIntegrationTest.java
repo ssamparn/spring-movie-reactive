@@ -10,7 +10,9 @@ import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWeb
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ActiveProfiles("test")
 @AutoConfigureWebTestClient
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class MovieInfoRestControllerTest {
+public class MovieInfoServiceIntegrationTest {
 
     @Autowired
     private WebTestClient webTestClient;
@@ -69,8 +71,27 @@ public class MovieInfoRestControllerTest {
                 .expectStatus()
                 .isOk()
                 .expectBodyList(MovieInfo.class)
-                .hasSize(3);
+                .hasSize(4);
     }
+
+    @Test
+    void get_movie_infos_by_release_year_test() {
+        URI uri = UriComponentsBuilder
+                .fromUriString("/api/v1/get-all-movie-info")
+                .queryParam("year", 2012)
+                .buildAndExpand()
+                .toUri();
+
+        webTestClient
+                .get()
+                .uri(uri)
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectBodyList(MovieInfo.class)
+                .hasSize(2);
+    }
+
 
     @Test
     void get_movie_info_by_id_test() {
