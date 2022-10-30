@@ -150,7 +150,7 @@ public class MovieInfoControllerUnitTest {
                 .uri("/api/v1/delete-movie-info-by-id/{movieInfoId}", "movieId")
                 .exchange()
                 .expectStatus()
-                .isNoContent()
+                .isNotFound()
                 .expectBody(Void.class);
     }
 }
