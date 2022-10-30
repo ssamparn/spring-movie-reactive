@@ -79,4 +79,11 @@ public class MovieReviewHandler {
                 .flatMap(movieReview -> movieReviewRepository.deleteById(movieReviewId)
                 .then(ServerResponse.noContent().build()));
     }
+
+    public Mono<ServerResponse> getMovieByMovieInfoId(ServerRequest request) {
+        String movieInfoId = request.pathVariable("movieInfoId");
+        Flux<MovieReview> movieReviewFlux = movieReviewRepository.findByMovieInfoId(Long.valueOf(movieInfoId));
+
+        return ServerResponse.ok().body(movieReviewFlux, MovieReview.class);
+    }
 }

@@ -21,6 +21,7 @@ public class MovieReviewRouterConfig {
     @Bean
     RouterFunction<ServerResponse> routes(MovieReviewHandler handler) {
         return route(GET("/api/v1/get-all-movie-reviews").and(accept(MediaType.APPLICATION_JSON)), handler::getAllMovieReview)
+                .andRoute(GET("/api/v1/get-movie-review/{movieInfoId}").and(accept(MediaType.APPLICATION_JSON)), handler::getMovieByMovieInfoId)
                 .andRoute(POST("/api/v1/create-movie-review").and(accept(MediaType.APPLICATION_JSON)), handler::createMovieReview)
                 .andRoute(PUT("/api/v1/update-movie-review/{movieReviewId}").and(contentType(MediaType.APPLICATION_JSON)), handler::updateMovieReview)
                 .andRoute(DELETE("/api/v1/delete-movie-review/{movieReviewId}").and(accept(MediaType.APPLICATION_JSON)), handler::deleteMovieReview);

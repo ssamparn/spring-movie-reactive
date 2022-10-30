@@ -44,8 +44,11 @@ public class MovieInfoRestController {
 
     @GetMapping("/get-movie-info-by-id/{movieInfoId}")
     @ResponseStatus(HttpStatus.OK)
-    public Mono<MovieInfo> getMovieInfoById(@PathVariable(name = "movieInfoId") String movieInfoId) {
-        return movieInfoService.getMovieInfoByInfoId(movieInfoId).log();
+    public Mono<ResponseEntity<MovieInfo>> getMovieInfoById(@PathVariable(name = "movieInfoId") String movieInfoId) {
+        return movieInfoService.getMovieInfoByInfoId(movieInfoId)
+                .map(movieInfo -> ResponseEntity.ok().body(movieInfo))
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()))
+                .log();
     }
 
     @PutMapping("/update-movie-info/{movieInfoId}")
@@ -58,7 +61,7 @@ public class MovieInfoRestController {
                 .log();
     }
 
-    @DeleteMapping("/delete-movie-info-by-id/{movieInfoId}")
+    @DeleteMapping("/delete-movie-info/{movieInfoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Mono<Void> deleteMovieInfoById(@PathVariable(name = "movieInfoId") String movieInfoId) {
         return movieInfoService.deleteMovieInfoByInfoId(movieInfoId);
