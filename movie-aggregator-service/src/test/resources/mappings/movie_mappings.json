@@ -1,0 +1,42 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "urlPattern": "/api/v1/get-movie-info-by-id/movieId"
+      },
+      "response": {
+        "status": 200,
+        "bodyFileName": "getMovieInfo.json",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "urlPattern": "/api/v1/get-movie-info-by-id/movieIdDoesNotExist"
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "urlPattern": "/api/v1/get-movie-review/.*"
+      },
+      "response": {
+        "status": 200,
+        "bodyFileName": "getMovieReviews.json",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    }
+  ]
+}

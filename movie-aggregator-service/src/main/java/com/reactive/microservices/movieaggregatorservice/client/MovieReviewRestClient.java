@@ -6,6 +6,7 @@ import com.reactive.microservices.movieaggregatorservice.web.model.MovieReview;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -16,16 +17,18 @@ import reactor.core.publisher.Mono;
 @Component
 public class MovieReviewRestClient {
 
+    private final String url;
     private final WebClient webClient;
 
     @Autowired
-    public MovieReviewRestClient(@Qualifier("movieReviewWebClient") WebClient webClient) {
+    public MovieReviewRestClient(@Qualifier("movieReviewWebClient") WebClient webClient, @Value("${http.url.movie-review}") String url) {
         this.webClient = webClient;
+        this.url = url;
     }
 
     public Flux<MovieReview> retrieveMovieReviewsByMovieInfoId(String movieInfoId) {
         return webClient.get()
-                .uri("/get-movie-review/{movieInfoId}", movieInfoId)
+                .uri(url + "/get-movie-review/{movieInfoId}", movieInfoId)
                 .retrieve()
                 .onStatus(HttpStatus::is4xxClientError, clientResponse -> {
                     log.error("Error code : {}", clientResponse.statusCode().value());

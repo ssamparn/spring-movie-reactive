@@ -12,7 +12,6 @@ public class WebClientConfig {
     @Qualifier("movieInfoWebClient")
     public WebClient movieInfoWebClient() {
         return WebClient.builder()
-                .baseUrl("http://localhost:7071/api/v1")
                 .build();
     }
 
@@ -20,7 +19,6 @@ public class WebClientConfig {
     @Qualifier("movieReviewWebClient")
     public WebClient movieReviewWebClient() {
         return WebClient.builder()
-                .baseUrl("http://localhost:7072/api/v1")
                 .build();
     }
 }

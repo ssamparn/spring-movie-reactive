@@ -1,0 +1,26 @@
+[
+  {
+    "movieReviewId": "635da33c5f46f01eec8a2d9d",
+    "movieInfoId": 100,
+    "comment": "comment",
+    "rating": 2003.0
+  },
+  {
+    "movieReviewId": "635da38b5f46f01eec8a2d9e",
+    "movieInfoId": 100,
+    "comment": "comment",
+    "rating": 2003.0
+  },
+  {
+    "movieReviewId": "635da38b5f46f01eec8a2d9f",
+    "movieInfoId": 100,
+    "comment": "comment",
+    "rating": 2003.0
+  },
+  {
+    "movieReviewId": "635da38c5f46f01eec8a2da0",
+    "movieInfoId": 100,
+    "comment": "comment",
+    "rating": 2003.0
+  }
+]

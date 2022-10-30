@@ -1,0 +1,10 @@
+{
+  "movieInfoId": "100",
+  "movieName": "Some Movie2",
+  "releaseYear": 2003,
+  "cast": [
+    "A",
+    "B"
+  ],
+  "releaseDate": "2012-07-20"
+}

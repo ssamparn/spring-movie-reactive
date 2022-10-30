@@ -1,3 +1,6 @@
 server:
   port: 7070
 
+http.url:
+  movie-info: http://localhost:7071/api/v1
+  movie-review: http://localhost:7072/api/v1
