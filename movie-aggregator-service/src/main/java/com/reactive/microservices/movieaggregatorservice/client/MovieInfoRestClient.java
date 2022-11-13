@@ -1,5 +1,6 @@
 package com.reactive.microservices.movieaggregatorservice.client;
 
+import com.reactive.microservices.movieaggregatorservice.util.RetryUtil;
 import com.reactive.microservices.movieaggregatorservice.web.exception.MovieInfoClientException;
 import com.reactive.microservices.movieaggregatorservice.web.exception.MovieInfoServerException;
 import com.reactive.microservices.movieaggregatorservice.web.model.MovieInfo;
@@ -43,6 +44,7 @@ public class MovieInfoRestClient {
                             .flatMap(responseMessage -> Mono.error(new MovieInfoServerException("Server exception in MoviesInfo service" + responseMessage)));
                 })
                 .bodyToMono(MovieInfo.class)
+                .retryWhen(RetryUtil.retryMovieService())
                 .log();
     }
 

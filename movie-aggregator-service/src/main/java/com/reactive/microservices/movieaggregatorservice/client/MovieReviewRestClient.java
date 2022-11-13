@@ -1,5 +1,6 @@
 package com.reactive.microservices.movieaggregatorservice.client;
 
+import com.reactive.microservices.movieaggregatorservice.util.RetryUtil;
 import com.reactive.microservices.movieaggregatorservice.web.exception.MovieReviewClientException;
 import com.reactive.microservices.movieaggregatorservice.web.exception.MovieReviewServerException;
 import com.reactive.microservices.movieaggregatorservice.web.model.MovieReview;
@@ -44,6 +45,7 @@ public class MovieReviewRestClient {
                             .flatMap(responseMessage -> Mono.error(new MovieReviewServerException("Server exception in MoviesReview service" + responseMessage)));
                 })
                 .bodyToFlux(MovieReview.class)
+                .retryWhen(RetryUtil.retryMovieService())
                 .log();
     }
 
