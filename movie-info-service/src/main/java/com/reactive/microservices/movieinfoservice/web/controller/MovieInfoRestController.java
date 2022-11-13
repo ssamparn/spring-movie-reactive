@@ -30,7 +30,9 @@ public class MovieInfoRestController {
     @PostMapping("/create-movie-info")
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<MovieInfo> newMovieInfo(@RequestBody @Valid MovieInfo newMovieInfo) {
-        return movieInfoService.createMovieInfo(newMovieInfo).log();
+        return movieInfoService
+                .createMovieInfo(newMovieInfo)
+                .log();
     }
 
     @GetMapping("/get-all-movie-info")

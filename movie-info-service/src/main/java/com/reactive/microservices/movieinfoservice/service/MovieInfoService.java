@@ -6,15 +6,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.publisher.Sinks;
 
 @Service
 @RequiredArgsConstructor
 public class MovieInfoService {
 
     private final MovieInfoRepository movieInfoRepository;
+    private final Sinks.Many<MovieInfo> movieInfoSink;
 
     public Mono<MovieInfo> createMovieInfo(MovieInfo newMovieInfo) {
-        return movieInfoRepository.save(newMovieInfo);
+        return movieInfoRepository.save(newMovieInfo)
+                .doOnNext(movieInfoSink::tryEmitNext);
     }
 
     public Flux<MovieInfo> getAllMovieInfo() {
